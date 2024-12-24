@@ -6,7 +6,7 @@ services:
     networks:
       - sample-net
     ports:
-      - "80:80"
+      - "8081:80"
       - 8082:8082
     volumes:
       - ./traefik.yml:/etc/traefik/traefik.yml
