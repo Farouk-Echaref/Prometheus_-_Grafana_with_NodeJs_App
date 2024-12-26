@@ -15,33 +15,20 @@ This repository demonstrates a monitoring solution for a **Node.js application**
 
 ## Architecture Overview
 
-![Architecture Diagram](project_architecture.webp)
+### System Architecture
+![System Architecture](project_architecture.webp)
 
-### Components
-1. **Node.js Application**:  
-   - Serves the application logic and HTTP requests.  
-   - Traefik handles routing traffic to this application.  
+This diagram provides a high-level view of how the components interact.
 
-2. **Traefik Web Server**:  
-   - Acts as a reverse proxy.  
-   - Exposes metrics at `/metrics` for Prometheus integration.  
+### Prometheus Architecture
+![Prometheus Architecture](prometheus_architecture.webp)
 
-3. **Prometheus**:  
-   - Collects metrics from all sources, including:
-     - **Traefik**
-     - **Node Exporter**
-     - **cAdvisor**  
-   - Stores metrics for querying.  
-
-4. **Grafana**:  
-   - Connects to Prometheus as a data source.  
-   - Provides real-time dashboards for monitoring system and application health.  
-
-5. **Node Exporter**:  
-   - Provides hardware and OS-level metrics (e.g., CPU, memory).  
-
-6. **cAdvisor**:  
-   - Monitors container-level resource utilization and performance metrics.  
+The Prometheus architecture diagram illustrates:
+- **Service Discovery**: Dynamically identifies scrape targets (e.g., Kubernetes pods, file-based configurations).  
+- **Metrics Collection**: Prometheus retrieves metrics from **jobs/exporters** or receives pushed metrics from **short-lived jobs** via the Pushgateway.  
+- **TSDB (Time Series Database)**: Metrics are stored in a high-performance time-series database.  
+- **Alerting and Notifications**: Prometheus integrates with **Alertmanager** to send alerts via email, PagerDuty, and other services.  
+- **Visualization**: Metrics can be visualized using the **Prometheus web UI** or external tools like **Grafana**.  
 
 ---
 
@@ -156,4 +143,3 @@ scrape_configs:
 - Automate dashboard provisioning with Grafana’s API.
 
 ---
-
